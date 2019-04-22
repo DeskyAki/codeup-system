@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>代码上传</title>
+    <link rel="stylesheet" href="../static/index/vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../static/index/vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../static/index/styles.css">
+    <script src="../static/chart/drilldown.js"></script>
+    <script src="../static/chart/exporting.js"></script>
+    <script src="../static/chart/highcharts.js"></script>
+    <script src="../static/index/jquery.min.js"></script>
+    <script src="../static/index/popper.min.js"></script>
+    <script src="../static/index/bootstrap.min.js"></script>
+    <script src="../static/index/carbon.js"></script>
+
+    <style>
+        .mycss {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body class="sidebar-fixed header-fixed">
+<div class="page-header">
+    <nav class="navbar page-header">
+        <a class="navbar-brand" href="/index">
+            <img src="../static/index/imgs/logo.png" alt="logo">
+        </a>
+
+        <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+            <i class="fa fa-bars"></i>
+        </a>
+        <h3 style="color: #1c95a4" class="mycss">欢迎使用代码上传系统</h3>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item d-md-down-none">
+                <a href="#">
+                    <i class="fa fa-bell"></i>
+                    <span class="badge badge-pill badge-danger">5</span>
+                </a>
+            </li>
+            <!-- 前面铃铛，后面信封  -->
+            <li class="nav-item d-md-down-none">
+                <a href="#">
+                    <i class="fa fa-envelope-open"></i>
+                    <span class="badge badge-pill badge-danger">9</span>
+                </a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <img src="../static/index/imgs/avatar-1.png" class="avatar avatar-sm" alt="logo">
+                    <span class="small ml-1 d-md-down-none">{{ session['user_info']['nickname'] }}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="/logout" class="dropdown-item">
+                        <i class="fa fa-lock"></i> Logout
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!------------------导航栏结束------------------------>
+<div class="main-container">
+    <div class="sidebar">
+        <nav class="sidebar-nav">
+            <ul class="nav">
+                <li class="nav-title">选项</li>
+                <li class="nav-item ">
+                    <a href="/index" class="nav-link {% if  request.path == '/index'%}active{% endif %}">
+                        <i class="icon icon-speedometer "></i> 个人详情
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/user_list" class="nav-link {% if  request.path == ''%}active{% endif %}">
+                        <i class="icon icon-puzzle"></i> 他人情况
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/upload" class="nav-link {% if  request.path == '/upload'%}active{% endif %}">
+                        <i class="icon icon-grid"></i> 代码上传
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+    </div>
+</div>
+<!--------------  左侧面本结束 ------------------------>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                {% block extra %}
+                {% endblock %}
+            </div>
+            <div class="card" style="width: auto; height: auto ">
+                {% block chart %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    {% block js %}
+        <!-- 图表的js -->
+    {% endblock %}
+</script>
+</body>
+</html>

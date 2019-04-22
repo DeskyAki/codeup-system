@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block chart %}
+
+    <div class="card-header bg-light">
+        个人情况
+        <div style="float: right">
+            <form action="/index" method="post" >
+                <select name="time" id="time">
+                    <option value="0">月份选择</option>
+                    <option value="1" >一月</option>
+                    <option value="2">二月</option>
+                    <option value="3">三月</option>
+                    <option value="4">四月</option>
+                    <option value="5">五月</option>
+                    <option value="6">六月</option>
+                    <option value="7">七月</option>
+                    <option value="8">八月</option>
+                    <option value="9">九月</option>
+                    <option value="10">十月</option>
+                    <option value="11">十一月</option>
+                    <option value="12">十二月</option>
+                </select>
+                <button type="submit" class="btn btn-primary btn-sm" >确认</button>
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="card-body">
+        <div class="mb-4">
+            <div id="container" style="min-width:400px;height:400px"></div>
+            <hr>
+        </div>
+    </div>
+    <p id="data" style="display: none">{{ chart_list }}</p>
+{% endblock %}
+
+{% block js %}
+    var chart_data = $("#data").html()
+    var chart = Highcharts.chart('container', {
+    chart: {
+    type: 'column'
+    },
+    title: {
+    text: '个人代码详情统计'
+    },
+    xAxis: {
+    type: 'category',
+    labels: {
+    rotation: -45  // 设置轴标签旋转角度
+    }
+    },
+    yAxis: {
+    min: 0,
+    title: {
+    text: '代码量 (行)'
+    }
+    },
+    legend: {
+    enabled: false
+    },
+    tooltip: {
+    pointFormat: '代码量: <b>{point.y:.0f} 行数</b>'
+    },
+    series: [{
+    name: '行数',
+    data: JSON.parse(chart_data),
+    dataLabels: {
+    enabled: true,
+    rotation: -90,
+    color: '#FFFFFF',
+    align: 'right',
+    format: '{point.y:.0f}', // :.1f 为保留 1 位小数
+    y: 10
+    }
+    }]
+    });
+
+{% endblock %}

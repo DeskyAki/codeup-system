@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <base href="<%=basePath%>">
+
+    <title>My JSP '1.jsp' starting page</title>
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="This is my page">
+    <!--
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    -->
+
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(
+            function () {
+
+                $(document).bind("click", function (e) {
+                        //如果点击的不是显示按钮和选择框，就执行隐藏方法
+                        if ($(e.target).closest("#testSelect").length == 0 &&
+                            $(e.target).closest("#xianshi").length == 0 &&
+                            $(e.target).closest("#tijiao").length == 0) {
+                            //隐藏节点
+                            $("#testSelect").hide();
+                        }
+                    }
+                );
+
+                $("#xianshi").click(
+                    function () {
+                        $("#testSelect").show();
+                    }
+                );
+            }
+        );
+
+        function myFunction() {
+            check();
+            $("#myForm").submit();
+        }
+
+        function check() {
+            if ($("#testSelect").css("display") == "none") {
+                $("#testSelect").val(null);
+            }
+        }
+
+    </script>
+</head>
+<body>
+<form id="myForm" action="2.jsp" method="get">
+    <p id="xianshi">点击选择！</p>
+    <select id="testSelect" name="se" style="display:none;">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
+    <input id="tijiao" type="button" value="提交" onclick="myFunction()"/>
+</form>
+</body>
+</html>
