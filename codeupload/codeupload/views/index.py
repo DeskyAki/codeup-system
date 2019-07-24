@@ -27,8 +27,12 @@ def index():
         return render_template('index.html', chart_list=chart_list)
         # return render_template("test.html")
     date = request.form.get('time')
-    if date == str('0'):
-        data_List = helper.fetch_all("select ctime, line from record where user_id=%s", (session['user_info']['id']))
+    
+    if not date:
+    # if date == str('0'):     这么写实在太垃圾了
+        # data_List = helper.fetch_all("select ctime, line from record where user_id=%s", (session['user_info']['id']))
+        
+        return redirect('/index')
     else:
         data_List = helper.fetch_all("select ctime, line from record where user_id=%s and month(ctime)=%s", (session['user_info']['id'], date))
     chart_list = []
